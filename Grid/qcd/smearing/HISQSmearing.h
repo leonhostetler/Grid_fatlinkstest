@@ -355,7 +355,7 @@ public:
             c1 = (1/2.)*real(trace(Q*Q));
             c2 = (1/3.)*real(trace(Q*Q*Q));
             S  = (1/3.)*c1-(1/18.)*c0*c0;
-            if (norm2(S)<1e-28) {
+            if (norm2(S)<1e-8) {
                 g0 = (1/3.)*c0; g1 = g0; g2 = g1;
             } else {
                 R     = (1/2.)*c2-(1/3. )*c0*c1+(1/27.)*c0*c0*c0;
