@@ -355,6 +355,7 @@ public:
             c1 = (1/2.)*real(trace(Q*Q));
             c2 = (1/3.)*real(trace(Q*Q*Q));
             S  = (1/3.)*c1-(1/18.)*c0*c0;
+            Grid_log("Using new version with norm2(S)<1e-8");
             if (norm2(S)<1e-8) {
                 g0 = (1/3.)*c0; g1 = g0; g2 = g1;
             } else {
