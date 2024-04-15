@@ -342,9 +342,6 @@ public:
     void projectU3(GF& u_proj, GF& u_mu) const {
 
         auto grid = this->_grid;
-
-        Grid_log(u_mu);
-
         LF V(grid), Q(grid), sqrtQinv(grid), id_3(grid), diff(grid);
         CF c0(grid), c1(grid), c2(grid), g0(grid), g1(grid), g2(grid), S(grid), R(grid), theta(grid), 
            u(grid), v(grid), w(grid), den(grid), f0(grid), f1(grid), f2(grid);
@@ -357,16 +354,6 @@ public:
             c1 = (1/2.)*real(trace(Q*Q));
             c2 = (1/3.)*real(trace(Q*Q*Q));
             S  = (1/3.)*c1-(1/18.)*c0*c0;
-            if (mu==0) {
-                Grid_log("Using new version with norm2(S)<1e-8");
-                Grid_log(V);
-                Grid_log(Q);
-                Grid_log(c0);
-                Grid_log(c1);
-                Grid_log(c2);
-                Grid_log(S);
-            }
-            
             if (norm2(S)<1e-8) {
                 g0 = (1/3.)*c0; g1 = g0; g2 = g1;
             } else {
@@ -385,26 +372,8 @@ public:
             f1    = (-w-u*u*u+2.*u*v)/den;
             f2    = u/den;
             id_3  = 1.;
-
             sqrtQinv = f0*id_3 + f1*Q + f2*Q*Q;
-
             PokeIndex<LorentzIndex>(u_proj, V*sqrtQinv, mu);
-
-            if (mu==0) {
-                Grid_log(g0);
-                Grid_log(g1);
-                Grid_log(g2);
-                Grid_log(u);
-                Grid_log(v);
-                Grid_log(w);
-                Grid_log(den);
-                Grid_log(f0);
-                Grid_log(f1);
-                Grid_log(f2);
-                Grid_log(id_3);
-                Grid_log(sqrtQinv);
-                Grid_log(u_proj);
-            }
         }
     };
 
